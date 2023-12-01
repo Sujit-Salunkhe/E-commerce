@@ -18,8 +18,6 @@ const Product = ({product}) => {
                 ${product.price}
             </Card.Text>
         </CardBody>
-
-      
     </Card>
   )
 }
