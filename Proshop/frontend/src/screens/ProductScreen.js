@@ -1,6 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -11,22 +9,20 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../componets/Rating";
+import  {useGetProductsDetailsQuery} from '../slices/productsApiSlice.js'
+import Loader from "../componets/Loader";
+import Message from "../componets/Message";
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const [product, setProduct] = useState({});
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`);
-      setProduct(data);
-    };
-    fetchData();
-  }, [productId]);
-
-  return (
+  const {data:product,isLoading,error} = useGetProductsDetailsQuery (productId)
+   return (
     <>
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
+      {  isLoading ? (
+        <Loader />
+      ) : error ? (<Message varient='danger'>{error?.data?.message ||  error.error}</Message>) : (<>  
       <Row>
         <Col md={5}>
           <Image src={product.image} alt={product.name} fluid />
@@ -79,7 +75,8 @@ const ProductScreen = () => {
             </ListGroup>
           </Card>
         </Col>
-      </Row>
+      </Row></>) }
+    
     </>
   );
 };
