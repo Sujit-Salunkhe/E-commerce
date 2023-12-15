@@ -34,8 +34,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
             totalPrice
         });
         const createdOrder = await order.save();
-        console.log(createdOrder)
-
         res.status(201).json(createdOrder);
     }
 });
@@ -44,7 +42,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @route  GET/api/orders/myorders
 // @access Private
 const getMyOrders = asyncHandler(async (req, res) => {
-    console.log('comming')
     const orders = await Order.find({user:req.user._id})
     res.status(200).json(orders)
 });
@@ -53,12 +50,10 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @route  GET/api/orders/:id
 // @access Private
 const getOrderById = asyncHandler(async (req, res) => {
-    console.log(req.user)
     const order = await Order.findById(req.params.id).populate('user','name email');
     console.log(order)
     if(order){
         res.status(200).json(order);
-        console.log('its enter')
     }else {
         res.status(404)
         console.log('error')
