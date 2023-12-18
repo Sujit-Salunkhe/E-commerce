@@ -23,7 +23,7 @@ const importData = async() => {
         await Product.insertMany(sampleProducts)
         console.log('Date imported'.green.inverse)
         process.exit()
-    }catch(error){
+    }catch(error){  
             console.error(`${error}.red.inverse`);
             process.exit(1)
     }
