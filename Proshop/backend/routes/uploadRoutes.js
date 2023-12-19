@@ -20,7 +20,7 @@ function checkFileType(file,cb){
     if(extname && mimetype){
         return cb(null,true);
     }else{
-        cd('Images Only!')
+        cb('Images Only!')
     }
 }
 
