@@ -1,6 +1,6 @@
 import {LinkContainer} from 'react-router-bootstrap';
-import {Table, Button, Row,Col, Toast} from 'react-bootstrap';
-import {FaTimes,FaEdit,FaTrash} from 'react-icons/fa';
+import {Table, Button, Row,Col,} from 'react-bootstrap';
+import {FaEdit,FaTrash} from 'react-icons/fa';
 import Message from '../../componets/Message';
 import Loader from '../../componets/Loader';
 import { useGetProductsQuery,useCreateProductMutation } from '../../slices/productsApiSlice'
@@ -15,7 +15,7 @@ const ProductListScreen = () => {
     const createProductHandler = async() => {
             if(window.confirm("Do You Really Want To Create A New Order")){
                 try {
-                    const productde = await createProduct();
+                    await createProduct();
                     refetch();
                 } catch (err) {
                      toast.error(err?.data?.Message || err.message)
