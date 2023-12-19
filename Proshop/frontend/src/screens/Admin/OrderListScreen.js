@@ -25,11 +25,11 @@ const OrderListScreen = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
+          {orders?.map((order) => (
             <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0,10)}</td>
+                <td>{order?.user && order?.user?.name}</td>
+                <td>{order.createdAt && order.createdAt.substring(0,10)}</td>
                 <td>{order.totalPrice}</td>
                 <td>{order.isPaid ? (
                   order.paidAt.substring(0,10)

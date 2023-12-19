@@ -12,7 +12,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-  const [createOrder,{isLoading , error}] = useCreateOrderMutation ();
+  const [createOrder,{isLoading , error}] = useCreateOrderMutation();
   //calculates Price
   useEffect(() => {
         if(!cart.shippingAddress.address){
@@ -20,7 +20,7 @@ const PlaceOrderScreen = () => {
         }   else if (!cart.paymentMethod){
             navigate('/payment')
         }
-    },[cart.paymentMethod,cart.shippingAddress.address]);
+    },[cart.paymentMethod,cart.shippingAddress.address,navigate]);
 
     const placeOrderHandler = async() => {
         try {
@@ -34,10 +34,11 @@ const PlaceOrderScreen = () => {
                 shippingPrice:cart.shippingPrice,
                 totalPrice:cart.totalPrice,
             }).unwrap();
-            console.log(res)
-            dispatch(clearCartItems())
+            dispatch(clearCartItems())  
             navigate(`/order/${res._id}`);
+            
         } catch (error) {
+                
                 toast.error(error)
         }
     }
