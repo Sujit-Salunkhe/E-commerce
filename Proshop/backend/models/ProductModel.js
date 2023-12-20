@@ -14,7 +14,7 @@ const reviewsSchema =mongoose.Schema({
         type:Number,
         required:true
     },
-    Comment:{
+    comment:{
         type:String,
         required:true
     }

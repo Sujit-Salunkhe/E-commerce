@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import { Card, CardBody } from 'react-bootstrap'
 import Rating from './Rating'
 
+
 const Product = ({product}) => {
   return (
+    <>
+    {/* <Meta title={product.name}/> */}
     <Card className='my-3 p-3 rounded'>
         <Link  to={`/product/${product._id}`}>
             <Card.Img src={product.image} variant='top'/>
@@ -23,6 +26,7 @@ const Product = ({product}) => {
             </Card.Text>
         </CardBody>
     </Card>
+    </>
   )
 }
 
