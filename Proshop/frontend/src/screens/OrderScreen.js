@@ -11,6 +11,7 @@ import {useEffect} from 'react'
 const OrderScreen = () => {
     const {id:orderId} = useParams();  
     const {data:order,refetch,isLoading,error} = useGetOrderDetailsQuery(orderId)
+    
     const [payOrder,{isLoading : loadingPay}] = usePayOrderMutation();
     const [{ isPending}, paypalDispatch] =usePayPalScriptReducer();
     const {data:paypal,isLoading:loadingPayPal,error:errorPayPal,} = useGetPayPalClientIdQuery();

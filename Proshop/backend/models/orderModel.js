@@ -58,6 +58,11 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    shippingPrice: {
+      type: mongoose.Schema.Types.Mixed,
+      required: true,
+      default:'Free'
+    },
     totalPrice: {
       type: Number,
       required: true,
