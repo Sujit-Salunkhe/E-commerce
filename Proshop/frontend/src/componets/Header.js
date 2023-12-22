@@ -7,21 +7,28 @@ import { useSelector,useDispatch } from "react-redux";
 import { logout } from '../slices/authSlice'
 import { useNavigate } from 'react-router-dom'
 import SearchBox from "./SearchBox";
+import { useCreateCartMutation} from '../slices/cartApiSlice'
 const Header = () => {
   const {cartItems} = useSelector((state) => state.cart);
   const {userInfo} = useSelector((state) => state.auth);
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [logoutApiCall] = useLogoutMutation();
+  const [creteCartItems] = useCreateCartMutation();
+  
   const logoutHandler = async() => {
     try {
-        await logoutApiCall().unwrap(); 
-        dispatch(logout())
-        navigate('/login')
+      console.log(cartItems)
+      const res = await  creteCartItems({cartItems}).unwrap()
+      console.log(res)
+      await logoutApiCall().unwrap(); 
+      dispatch(logout())
+      navigate('/login')
         } catch (err) {
         console.log(err)
        }
   }
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>

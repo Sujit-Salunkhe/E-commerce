@@ -18,7 +18,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
          res.status(400);
          throw new Error('No Order items');
     }else{ 
-        console.log('come')
+        
         const order = new Order({
             orderItems : orderItems.map((x) => ({
                     ...x,
