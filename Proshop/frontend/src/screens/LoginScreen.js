@@ -8,9 +8,11 @@ import { useLoginMutation } from '../slices/usersApiSlice'
 import { setCredentials } from '../slices/authSlice.js'
 import { toast } from 'react-toastify'
 
+
 const LoginScreen = () => {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+  
   
   const dispatch = useDispatch();
   const navigate  = useNavigate()
@@ -25,18 +27,20 @@ const LoginScreen = () => {
         navigate(redirect)
       }
   },[userInfo,redirect,navigate])
-    const submitHandler = async(e) => {
-        e.preventDefault()
-        try {
-          const res = await login({email,password}).unwrap();
-          dispatch(setCredentials({...res}))
-          navigate(redirect)
-        } catch (err) {
-          toast.error(err?.data?.message || err.error);
-        }
+  const submitHandler = async(e) => {
+    e.preventDefault()
+    try {
+      const res = await login({email,password}).unwrap();
+      dispatch(setCredentials({...res}))
+      navigate(redirect)
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
+  }
     
   return (
+    <>
+    
     <FormContainer>
       <h1>
         Sign in
@@ -69,6 +73,7 @@ const LoginScreen = () => {
         </Col>
       </Row>
     </FormContainer>
+    </>
   )
 }
 

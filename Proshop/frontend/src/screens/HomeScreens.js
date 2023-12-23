@@ -6,12 +6,27 @@ import Product from "../componets/Product";
 import Loader from "../componets/Loader";
 import Message from "../componets/Message";
 import Paginate from "../componets/Paginate";
+import {useGetCartItemsQuery} from '../slices/cartApiSlice.js'
+import { addToCart } from "../slices/cartSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const HomeScreens = () => {
   const {pageNumber,keyword} = useParams();
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
+  const {data:cartData,isLoading:cartLoading} = useGetCartItemsQuery();
+  useEffect( () => {
+    if (!cartLoading && auth && cartData.length > 0 ) {
+       cartData.map((x) => dispatch(addToCart({ ...x })));
+    }
+    console.log(cartData)
+    
+}, );
   return (
     <>
+      
       {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link> }
       {isLoading ? (
         <Loader />

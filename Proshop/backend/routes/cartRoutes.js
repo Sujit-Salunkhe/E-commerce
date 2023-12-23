@@ -10,8 +10,8 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(protect, getCartItems) 
-  .delete(protect, deleteCartItems)
+  .get(protect,getCartItems) 
   .post(protect, createCartItems);
+router.route('/:id',protect,deleteCartItems)
 
 export default router;

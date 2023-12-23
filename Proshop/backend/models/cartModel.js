@@ -8,7 +8,7 @@ const cartSchema = mongoose.Schema(
       },
       cartItems: [
         {
-          name:{
+        name:{
             type:String,
             required:true
         },
@@ -49,6 +49,10 @@ const cartSchema = mongoose.Schema(
             required:true,
             default:0
         },
+        qty:{
+            type:Number,
+            required:true
+        }
           
         },
       ],
