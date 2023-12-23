@@ -14,11 +14,12 @@ import { useEffect } from "react";
 const HomeScreens = () => {
   const {pageNumber,keyword} = useParams();
   const auth = useSelector(state => state.auth)
+  const {userInfo} = auth;
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
   const {data:cartData,isLoading:cartLoading} = useGetCartItemsQuery();
   useEffect( () => {
-    if (!cartLoading && auth && cartData.length > 0 ) {
+    if (!cartLoading && userInfo && cartData.length > 0 ) {
        cartData.map((x) => dispatch(addToCart({ ...x })));
     }
     console.log(cartData)
