@@ -20,12 +20,10 @@ const HomeScreens = () => {
   const {data:cartData,isLoading:cartLoading,refetch} = useGetCartItemsQuery();
   useEffect( () => {
     refetch()
-    if (!cartLoading && userInfo && cartData.length > 0 ) {
+    if (!cartLoading && userInfo  ) {
        cartData.map((x) => dispatch(addToCart({ ...x })));
     }
-    
-    
-}, );
+  }, );
   return (
     <>
       
