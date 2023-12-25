@@ -7,7 +7,6 @@ import Cart from "../models/cartModel.js";
 
 const createCartItems = asyncHandler(async (req, res) => {
   const cart = await Cart.deleteOne({ user: req.user._id });
-
   const newCart = new Cart({
     user: req.user._id,
     cartItems: req.body.cartItems.map((x) => ({
@@ -23,8 +22,10 @@ const createCartItems = asyncHandler(async (req, res) => {
 // @access Private
 
 const getCartItems = asyncHandler(async (req, res) => {
-  const cart = await Cart.findOne({ user: req.user._id });
-
+  const cart = await Cart.findOne({ user: req.user._id }).populate(
+    "user",
+    "name"
+  );
   if (cart) {
     res.status(202).json(cart.cartItems);
   } else {
@@ -36,6 +37,8 @@ const getCartItems = asyncHandler(async (req, res) => {
 // @route  delete/api/cart
 // @access Private
 const deleteCartItems = asyncHandler(async (req, res) => {
+  console.log("come");
+  console.log(req.params.id);
   try {
     const updatedCart = await Cart.updateOne(
       { user: req.user._id },
@@ -49,23 +52,8 @@ const deleteCartItems = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     console.error("Error removing item from cart:", error);
-    res.status(500).json({ message: "Internal server error sujit" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 export { createCartItems, getCartItems, deleteCartItems };
-// if (cart) {
-//     req.body.cartItems.forEach((newItem) => {
-//     const existingItem = cart.cartItems.find((item) => item.product.toString() === newItem._id.toString() );
-//         if (!existingItem) {
-//             cart.cartItems.push({
-//                 ...newItem,
-//                 _id: undefined,
-//                 product: newItem._id,
-//             });
-//         } else {
-//             existingItem.qty += newItem.qty;
-//         }
-//     })
-//     await cart.save()}
-//     else{

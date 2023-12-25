@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState,useEffect,useRef } from "react"
 import {Link,useLocation, useNavigate} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {Form,Button,Row,Col} from 'react-bootstrap'
@@ -13,7 +13,6 @@ const RegisterScreen = () => {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   const [confirmPassword,setConfirmPassword] = useState('')
-  
   const dispatch = useDispatch();
   const navigate  = useNavigate()
   const [register , {isLoading}] = useRegisterMutation();
@@ -41,6 +40,16 @@ const RegisterScreen = () => {
           }    
         }
       }
+    const nameRef = useRef();
+    const emailRef= useRef();
+    const passworedRef=useRef();
+    const confirmPasswordRef= useRef();
+    const handleKeyDown = (ref,e) => {
+      if(e.key === 'Enter'){
+        e.preventDefault()
+        ref.current.focus()
+      }
+  }
     
   return (
     <FormContainer>
@@ -53,6 +62,8 @@ const RegisterScreen = () => {
              <Form.Control
              type="text"
              value={name}
+             ref={nameRef}
+             onKeyDown={(e) => handleKeyDown(emailRef,e)}
              placeholder="Enter Name"
              onChange={(e) => setName(e.target.value)}/>
         </Form.Group>
@@ -60,7 +71,9 @@ const RegisterScreen = () => {
              <Form.Label>Email Address</Form.Label>
              <Form.Control
              type="email"
+             onKeyDown={(e) => handleKeyDown(passworedRef,e)}
              value={email}
+             ref={emailRef}
              placeholder="Enter email"
              onChange={(e) => setEmail(e.target.value)}/>
         </Form.Group>
@@ -68,6 +81,8 @@ const RegisterScreen = () => {
              <Form.Label>Password</Form.Label>
              <Form.Control
              type="password"
+             ref={passworedRef}
+             onKeyDown={(e) => handleKeyDown(confirmPasswordRef,e)}
              value={password}
              placeholder="Password"
              onChange={(e) => setPassword(e.target.value)}/>
@@ -76,6 +91,8 @@ const RegisterScreen = () => {
              <Form.Label>Confirm Password</Form.Label>
              <Form.Control
              type="password"
+             ref={confirmPasswordRef}
+             onKeyDown={(e) => handleKeyDown(confirmPasswordRef,e)}
              value={confirmPassword}
              placeholder="Confirm Password"
              onChange={(e) => setConfirmPassword(e.target.value)}/>

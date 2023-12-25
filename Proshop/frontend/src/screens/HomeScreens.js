@@ -17,12 +17,13 @@ const HomeScreens = () => {
   const {userInfo} = auth;
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
-  const {data:cartData,isLoading:cartLoading} = useGetCartItemsQuery();
+  const {data:cartData,isLoading:cartLoading,refetch} = useGetCartItemsQuery();
   useEffect( () => {
+    refetch()
     if (!cartLoading && userInfo && cartData.length > 0 ) {
        cartData.map((x) => dispatch(addToCart({ ...x })));
     }
-    console.log(cartData)
+    
     
 }, );
   return (

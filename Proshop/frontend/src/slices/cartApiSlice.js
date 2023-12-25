@@ -8,7 +8,8 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 url: CART_URL,
                 method:'POST', 
                 body: cartItems
-            })
+            }),
+            
         }),
         getCartItems:builder.query({
             query:() => ({

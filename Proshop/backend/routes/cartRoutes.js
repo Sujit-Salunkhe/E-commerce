@@ -12,6 +12,6 @@ router
   .route("/")
   .get(protect,getCartItems) 
   .post(protect, createCartItems);
-router.route('/:id',protect,deleteCartItems)
+router.route('/:id').delete(protect,deleteCartItems)
 
 export default router;
