@@ -17,16 +17,14 @@ const HomeScreens = () => {
   const {userInfo} = auth;
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
-  const {data:cartData,isLoading:cartLoading,refetch} = useGetCartItemsQuery();
-  useEffect( () => {
-    refetch()
+  const {data:cartData,isLoading:cartLoading} = useGetCartItemsQuery();
+  useEffect(() => {
     if (!cartLoading && userInfo  ) {
-       cartData.map((x) => dispatch(addToCart({ ...x })));
+      cartData.map((x) => dispatch(addToCart({ ...x })));
     }
-  }, );
+  },);
   return (
     <>
-      
       {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link> }
       {isLoading ? (
         <Loader />
