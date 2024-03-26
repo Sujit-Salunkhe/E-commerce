@@ -34,6 +34,7 @@ const PlaceOrderScreen = () => {
                 shippingPrice:cart.shippingPrice,
                 totalPrice:cart.totalPrice,
             }).unwrap();
+            
             dispatch(clearCartItems())  
             navigate(`/order/${res._id}`);
             
