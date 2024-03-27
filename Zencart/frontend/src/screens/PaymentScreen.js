@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Col } from "react-bootstrap";
 import CheckoutSteps from "../componets/CheckOutSteps.js";
 import FormContainer from "../componets/FormContainer.js";
-import { savePaymentMethod } from "../slices/cartSlice.js";
+
 
 const PaymentScreen = () => {
-  const [paymentMethod, setPaymentMethod] = useState("gpay");
-  const dispatch = useDispatch();
+  // const [paymentMethod, setPaymentMethod] = useState("gpay");
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
@@ -21,7 +21,7 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
+    // dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };
 
@@ -40,24 +40,11 @@ const PaymentScreen = () => {
               id="Paypal"
               name="paymentMethod"
               value="Paypal"
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              checked = {true}
             ></Form.Check>
           </Col>
         </Form.Group>
-        <Form.Group>
-          <Col>
-            <Form.Check
-              type="radio"
-              className="my-2"
-              label="G-pay"
-              id="G-pay"
-              name="paymentMethod"
-              value="G-pay"
-              //  checked = {paymentMethod === 'G-pay'}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
-          </Col>
-        </Form.Group>
+    
         <Button type="submit" variant="primary">
           {" "}
           Continue{" "}
