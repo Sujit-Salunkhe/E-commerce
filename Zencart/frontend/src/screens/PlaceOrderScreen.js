@@ -8,7 +8,6 @@ import Message from '../componets/Message.js'
 import Loader from '../componets/Loader.js'
 import {useCreateOrderMutation} from '../slices/orderApiSlice'
 import {clearCartItems} from '../slices/cartSlice'
-import {useDeleteCartItemsMutation} from '../slices/cartApiSlice.js'
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate()
