@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Col } from "react-bootstrap";
 import CheckoutSteps from "../componets/CheckOutSteps.js";
 import FormContainer from "../componets/FormContainer.js";
-
+import { savePaymentMethod } from "../slices/cartSlice.js";
 
 const PaymentScreen = () => {
-  const [paymentMethod, savePaymentMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('Paypal');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
@@ -23,6 +23,7 @@ const PaymentScreen = () => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
+    
   };
 
   return (
@@ -40,14 +41,15 @@ const PaymentScreen = () => {
               id="Paypal"
               name="paymentMethod"
               value="Paypal"
-              checked = {true}
+              checked 
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              
             ></Form.Check>
           </Col>
         </Form.Group>
     
-        <Button type="submit" variant="primary">
-          {" "}
-          Continue{" "}
+        <Button type="submit" variant="primary" >
+          Continue
         </Button>
       </Form>
     </FormContainer>
