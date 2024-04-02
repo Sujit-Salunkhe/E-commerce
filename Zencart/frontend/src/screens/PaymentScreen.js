@@ -1,5 +1,5 @@
-import {  useEffect } from "react";
-import {  useSelector } from "react-redux";
+import {  useEffect,useState} from "react";
+import {  useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Col } from "react-bootstrap";
 import CheckoutSteps from "../componets/CheckOutSteps.js";
@@ -7,8 +7,8 @@ import FormContainer from "../componets/FormContainer.js";
 
 
 const PaymentScreen = () => {
-  // const [paymentMethod, setPaymentMethod] = useState("gpay");
-  // const dispatch = useDispatch();
+  const [paymentMethod, savePaymentMethod] = useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
@@ -21,7 +21,7 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(savePaymentMethod(paymentMethod));
+    dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };
 
