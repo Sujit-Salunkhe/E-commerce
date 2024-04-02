@@ -27,7 +27,7 @@ const getCartItems = asyncHandler(async (req, res) => {
     "name"
   );
   if (cart) {
-    console.log('gaming')
+    
     res.status(202).json(cart.cartItems);
   } else {
     res.status(202).json([]);

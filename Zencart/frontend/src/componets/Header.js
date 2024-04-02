@@ -88,7 +88,6 @@ const Header = () => {
                 <LinkContainer to = '/admin/data'>
                   <Nav.Link>
                     <BsClipboard2Data/>
-                  {/* <i class="bi bi-database-check"></i> */}
                     Data
                   </Nav.Link>
                 </LinkContainer>
