@@ -18,17 +18,17 @@ const HomeScreens = () => {
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
   const {data:cartData,isLoading:cartLoading,cartError} = useGetCartItemsQuery();
-  try {
-    useEffect(() => {
-      if (!cartLoading && userInfo && !cartError  ) {
-        cartData.map((x) => dispatch(addToCart({ ...x })));
-      }
-    },);
-  }  
+//   try {
+//     useEffect(() => {
+//       if (!cartLoading && userInfo && !cartError  ) {
+//         cartData.map((x) => dispatch(addToCart({ ...x })));
+//       }
+//     },);
+//   }  
   
- catch (error) {
-  console.log(error)
- }
+//  catch (error) {
+//   console.log(error)
+//  }
   return (
     <>
       {keyword && <Link to='/' className='btn btn-light mb-4'>Go Back</Link> }
