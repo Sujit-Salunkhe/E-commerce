@@ -27,7 +27,6 @@ const PlaceOrderScreen = () => {
 
     const placeOrderHandler = async() => {
         try {
-            
             const res = await createOrder({
                 orderItems:cart.cartItems,
                 shippingAddress:cart.shippingAddress,
@@ -37,8 +36,6 @@ const PlaceOrderScreen = () => {
                 shippingPrice:cart.shippingPrice,
                 totalPrice:cart.totalPrice,
             }).unwrap();
-        
-            
             dispatch(clearCartItems())  
             deleteCartItems()
             navigate(`/order/${res._id}`);
