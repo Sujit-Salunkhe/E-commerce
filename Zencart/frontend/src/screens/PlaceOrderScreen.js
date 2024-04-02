@@ -15,7 +15,7 @@ const PlaceOrderScreen = () => {
 
   const dispatch = useDispatch()
   const [createOrder,{isLoading , error}] = useCreateOrderMutation();
-  const [deleteCartItems] = useCreateOrderMutation();
+ 
   //calculates Price
   useEffect(() => {
         if(!cart.shippingAddress.address){
@@ -37,7 +37,7 @@ const PlaceOrderScreen = () => {
                 totalPrice:cart.totalPrice,
             }).unwrap();
             dispatch(clearCartItems())  
-            deleteCartItems()
+            
             navigate(`/order/${res._id}`);
             } catch (error) {
                 toast.error(error)

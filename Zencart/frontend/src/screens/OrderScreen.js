@@ -13,9 +13,11 @@ import {
   useDeliverOrderMutation,
 } from "../slices/orderApiSlice";
 import { useEffect } from "react";
+import {useCreateOrderMutation} from '../slices/orderApiSlice'
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
+  const [deleteCartItems] = useCreateOrderMutation();
   const {
     data: order,
     refetch,
@@ -68,6 +70,7 @@ const OrderScreen = () => {
   }
   async function onApproveTest() {
     await payOrder({ orderId, details: { payer: {} } });
+    deleteCartItems()
     refetch();
     toast.success("Payment Successful");
   }
@@ -86,6 +89,7 @@ const OrderScreen = () => {
         ],
       })
       .then((orderId) => {
+        deleteCartItems()
         return orderId;
       });
   }
