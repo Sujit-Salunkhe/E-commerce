@@ -21,7 +21,7 @@ const Header = () => {
   
   const logoutHandler = async() => {
     try {
-      await  creteCartItems({cartItems}).unwrap()
+      // await  creteCartItems({cartItems}).unwrap()
       await logoutApiCall().unwrap(); 
       dispatch(clearCartItems())
       dispatch(logout())
