@@ -104,7 +104,7 @@ const RegisterScreen = () => {
       {isLoading && <Loader/>}
       <Row className="py-3">
         <Col>
-        Already Have An Account? <Link to= { redirect ? `/login?redirect=${redirect}` :'/login'}>Log in</Link>
+        Already Have An Account? <Link href= { redirect ? `/login?redirect=${redirect}` :'/login'}>Log in</Link>
         </Col>
       </Row>
     </FormContainer>
