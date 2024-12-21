@@ -10,14 +10,20 @@ import orderRoutes from './routes/orderRoutes.js'
 import cartRoutes from './routes/cartRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import salesRoutes from './routes/salesRoutes.js'
+import cors from 'cors'
 
-
-
-dotenv.config()
-const port = process.env.PORT || 5000 ;
+const envpath = path.resolve(
+    "C:\\Users\\Sujit\\OneDrive\\Desktop\\Practice\\project\\E-commerce-Zencart\\Zencart\\.env"
+)
+dotenv.config({
+    path:envpath
+})
+// console.log(process.env.port)
+const port = process.env.PORT || 8000 ;
 connectDB();
 const app = express()
 // body parser middleware
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

@@ -18,6 +18,7 @@ const HomeScreens = () => {
   const dispatch = useDispatch();
   const { data, isLoading, error } = useGetProductsQuery({keyword,pageNumber});
   const {data:cartData,isLoading:cartLoading,cartError} = useGetCartItemsQuery();
+
   useEffect(() => {
     const fetchData = async () => {
       if(cartData){
@@ -25,7 +26,7 @@ const HomeScreens = () => {
           if (!cartLoading && userInfo && !cartError) {
             cartData.forEach((x) => dispatch(addToCart({ ...x })));
           }
-        } catch (error) {
+        } catch (error) {  
           console.log(error);
         }
 
